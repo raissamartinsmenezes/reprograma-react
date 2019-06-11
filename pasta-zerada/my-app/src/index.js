@@ -9,8 +9,8 @@ import * as serviceWorker from './serviceWorker';
 let contadorNum = 0;
 
 const nome = {
-    primeiroNome: "Jessica",
-    sobreNome: "Lopes"
+    primeiroNome: "Raissa",
+    sobreNome: "Martins"
 }
 
 function nomeCompleto(nome){
@@ -18,12 +18,38 @@ function nomeCompleto(nome){
         return nome.primeiroNome + ' ' + nome.sobreNome;
     } else {
         return 'desconhecida'
-    }
-    
+    }   
 }
 
-const template = 
-                    <div className="contador">
+// dar um parâmetro genérico para poder reutilizar essa função
+function contadorIniciado(contador){
+    if(contador === 0) {
+        return <p>Contador não iniciado</p>
+    } else {
+        return <p>Contador iniciado</p>
+    }
+}
+
+// const template = 
+//                     <div className="contador">
+//                         <h1>Count: {contadorNum}</h1>
+//                         <h2>Oi, {nome.primeiroNome}</h2>
+//                         <h3>Olá, {nomeCompleto(null)}</h3>
+//                         <div>
+//                             <button>+1</button>
+//                             <button>-1</button>
+//                             <button>reset</button>
+//                         </div>
+//                     </div>
+
+// ReactDOM.render(template, document.getElementById('root'));
+
+// repete em um intervalo de tempo 
+setInterval(function(){
+    console.log(contadorNum)
+    // no template sempre só pode existir uma div mãe que abraça quanto filhos forem necessários
+    const template = 
+                    <div className="contador"> 
                         <h1>Count: {contadorNum}</h1>
                         <h2>Oi, {nome.primeiroNome}</h2>
                         <h3>Olá, {nomeCompleto(null)}</h3>
@@ -32,9 +58,11 @@ const template =
                             <button>-1</button>
                             <button>reset</button>
                         </div>
+                        {contadorIniciado(contadorNum)}
                     </div>
-
+contadorNum++                    
 ReactDOM.render(template, document.getElementById('root'));
+}, 1000)
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
