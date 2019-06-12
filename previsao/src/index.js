@@ -24,27 +24,82 @@ const previsao02 = {
     }
 }
 
+
+// se é componente funcional não precisa do this.props > apenas para elementos de classe 
+const Titulo = (props) => {
+    return(
+        <div>
+            <h1 className="previsao__data">{props.data}</h1>
+            <p className="previsao__resumo">{props.resumo}</p>
+        </div>
+    )
+}
+
+const Imagem = (props) => {
+    return(
+        <img className="previsao__img" src={props.imagem}></img>
+    )
+}
+
+const Temperatura = (props) => {
+    return(
+        <div>
+            <table className="previsao-temperatura">
+                <tr className="previsao-temperatura__linha">
+                    <th>Máxima</th>
+                    <td>{props.temperatura.max}</td>
+                </tr>
+                <tr className="previsao-temperatura__linha">
+                    <th>Mínima</th>
+                    <td>{props.temperatura.min}</td>
+                </tr>
+            </table>
+        </div>
+    )
+}
+
 class Previsao extends React.Component {
     render(){
         return(
                 <div className="previsao">
-                    <h1 className="previsao__data">{this.props.data}</h1>
-                    <p className="previsao__resumo">{this.props.resumo}</p>
-                    <img className="previsao__img" src={this.props.imagem}></img>
-                    <table className="previsao-temperatura">
-                        <tr className="previsao-temperatura__linha">
-                            <th>Máxima</th>
-                            <td>{this.props.temperatura.max}</td>
-                        </tr>
-                        <tr className="previsao-temperatura__linha">
-                            <th>Mínima</th>
-                            <td>{this.props.temperatura.min}</td>
-                        </tr>
-                    </table>
+                    < Titulo // componente funcional (dentro de uma função)
+                        data={this.props.data}
+                        resumo={this.props.resumo}
+                    />
+                    < Imagem 
+                        imagem={this.props.imagem}
+                    />
+                    < Temperatura 
+                        temperatura={this.props.temperatura}
+                    />
                 </div>
         )
     }
 }
+
+// class Previsao extends React.Component {
+//     render(){
+//         return(
+//                 <div className="previsao">
+//                     < Titulo // componente funcional (dentro de uma função)
+//                         data={this.props.data}
+//                         resumo={this.props.resumo}
+//                     />
+//                     <img className="previsao__img" src={this.props.imagem}></img>
+//                     <table className="previsao-temperatura">
+//                         <tr className="previsao-temperatura__linha">
+//                             <th>Máxima</th>
+//                             <td>{this.props.temperatura.max}</td>
+//                         </tr>
+//                         <tr className="previsao-temperatura__linha">
+//                             <th>Mínima</th>
+//                             <td>{this.props.temperatura.min}</td>
+//                         </tr>
+//                     </table>
+//                 </div>
+//         )
+//     }
+// }
 
 
 class Container extends React.Component {
@@ -52,7 +107,7 @@ class Container extends React.Component {
         return(
             <div className="previsao-container">
                 < Previsao 
-                    data={previsao01.data}
+                    data={previsao01.data} // enviado para o props para o componente previsão
                     resumo={previsao01.resumo}
                     imagem={previsao01.imagem}
                     temperatura={previsao01.temperatura}

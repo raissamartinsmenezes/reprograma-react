@@ -65,28 +65,50 @@ let contadorNum = 0;
 // }, 1000)
 
 class Contador extends React.Component {
-    addUm = () => {
-        contadorNum++
-        console.log(contadorNum)
-        ReactDOM.render(< Contador />, document.getElementById('root'))
+    constructor(props){
+        super(props); // vai herdar o pacote da mãe
+        this.state = { // o state é uma propriedade do objeto 
+            countadorNum: 0
+        }
+
+        this.addUm = this.addUm.bind(this)
     }
+
+    addUm = () => {
+        this.setState((previousState) => {
+            return {
+                contadorNum: previousState.contadorNum + 1
+            }
+        })
+
+        console.log(contadorNum)
+    }
+
+    
+    // addUm = () => {
+    //     contadorNum++
+    //     console.log(contadorNum)
+    //     // só quando ele for chamado ele vai renderizar, apenas aquele pedaço
+    //     // ReactDOM.render(< Contador />, document.getElementById('root'))
+    // }
 
     subUm = () => {
         contadorNum--
         console.log(contadorNum)
-        ReactDOM.render(< Contador />, document.getElementById('root'))
+        
     }
 
     reset = () => {
         contadorNum = 0
         console.log(contadorNum)
-        ReactDOM.render(< Contador />, document.getElementById('root'))
+        
     }
 
+    // <button onClick={this.addUm.bind(this)}>+1</button>
     render(){
         return (
             <div className="contador"> 
-                        <h1>Count: {contadorNum}</h1>
+                        <h1>Count: {this.state.countadorNumcontadorNum}</h1>
                         <div>
                             <button onClick={this.addUm}>+1</button>
                             <button onClick={this.subUm}>-1</button>
@@ -97,7 +119,7 @@ class Contador extends React.Component {
     }
 }
 
-ReactDOM.render(< Contador />, document.getElementById('root'))
+
 
 
 // If you want your app to work offline and load faster, you can change
