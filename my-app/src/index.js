@@ -65,25 +65,20 @@ let contadorNum = 0;
 // }, 1000)
 
 class Contador extends React.Component {
-    constructor(props){
+    constructor(props){ // tem que usar o this. para ele pegar dentro do escopo
         super(props); // vai herdar o pacote da mãe
         this.state = { // o state é uma propriedade do objeto 
-            countadorNum: 0
+            contadorNum: 0
         }
-
-        this.addUm = this.addUm.bind(this)
     }
 
-    addUm = () => {
-        this.setState((previousState) => {
+    addUm = () => { // this.setState é um método para mudar o estado
+        this.setState((previousState) => { // uma função que recebe como callback outra função
             return {
                 contadorNum: previousState.contadorNum + 1
             }
         })
-
-        console.log(contadorNum)
     }
-
     
     // addUm = () => {
     //     contadorNum++
@@ -93,31 +88,46 @@ class Contador extends React.Component {
     // }
 
     subUm = () => {
-        contadorNum--
-        console.log(contadorNum)
-        
+        this.setState((previousState) => {
+            return {
+                contadorNum: previousState.contadorNum - 1
+            }
+        })    
     }
 
+    // reset = () => {
+    //     this.setState(() => {
+    //         return {
+    //             contadorNum: 0
+    //         }
+    //     })   
+    // }
+
     reset = () => {
-        contadorNum = 0
-        console.log(contadorNum)
-        
+        this.setState((previousState) => {
+            return {
+                contadorNum: previousState.contadorNum = 0
+            }
+        })   
     }
 
     // <button onClick={this.addUm.bind(this)}>+1</button>
     render(){
         return (
             <div className="contador"> 
-                        <h1>Count: {this.state.countadorNumcontadorNum}</h1>
+                        <h1>Count: {this.state.contadorNum}</h1>
                         <div>
                             <button onClick={this.addUm}>+1</button>
                             <button onClick={this.subUm}>-1</button>
                             <button onClick={this.reset}>reset</button>
+                            <p>{this.state.contadorNum === 0 ? 'contador não iniciado':'contador iniciado'}</p>
                         </div>
                     </div>
         )
     }
 }
+
+ReactDOM.render(< Contador />, document.getElementById('root'))
 
 
 

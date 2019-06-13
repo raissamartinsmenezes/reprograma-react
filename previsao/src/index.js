@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import './App.css';
 import * as serviceWorker from './serviceWorker';
+import Titulo from './Titulo.js';
 
 const previsao01 = {
     data: '31/05/2019',
@@ -26,14 +27,14 @@ const previsao02 = {
 
 
 // se é componente funcional não precisa do this.props > apenas para elementos de classe 
-const Titulo = (props) => {
-    return(
-        <div>
-            <h1 className="previsao__data">{props.data}</h1>
-            <p className="previsao__resumo">{props.resumo}</p>
-        </div>
-    )
-}
+// const Titulo = (props) => {
+//     return(
+//         <div>
+//             <h1 className="previsao__data">{props.data}</h1>
+//             <p className="previsao__resumo">{props.resumo}</p>
+//         </div>
+//     )
+// }
 
 const Imagem = (props) => {
     return(
@@ -57,6 +58,10 @@ const Temperatura = (props) => {
         </div>
     )
 }
+
+// quando eu quero mudar alguma coisa do meu objeto, ou ele têm um ação eu utilizo uma componente de classe, mutável 
+
+// um componente funcional só renderiza um JSX, estático
 
 class Previsao extends React.Component {
     render(){
