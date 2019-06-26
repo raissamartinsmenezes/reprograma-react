@@ -1,10 +1,10 @@
 import React, { Component, Fragment } from 'react';
-import Cabecalho from './components/Cabecalho'
-import NavMenu from './components/NavMenu'
-import Dashboard from './components/Dashboard'
-import Widget from './components/Widget'
-import TrendsArea from './components/TrendsArea'
-import Tweet from './components/Tweet'
+import Cabecalho from '../../components/Cabecalho'
+import NavMenu from '../../components/NavMenu'
+import Dashboard from '../../components/Dashboard'
+import Widget from '../../components/Widget'
+import TrendsArea from '../../components/TrendsArea'
+import Tweet from '../../components/Tweet'
 
 class App extends Component {
     constructor(props) {
@@ -18,12 +18,12 @@ class App extends Component {
     // ... spread dentro de um array 
     adicionaTweet = (e) => {
         e.preventDefault()
-        const novoTweet = this.state.novoTweet
-        const anteriores = this.state.tweets
-        this.setState({
-            tweets: [novoTweet, ...anteriores],
+        // const novoTweet = this.state.novoTweet
+        // const anteriores = this.state.tweets
+        this.setState(stateAnterior => ({
+            tweets: [stateAnterior.novoTweet, ...stateAnterior.tweets],
             novoTweet: ''
-        })
+        }))
     }
 
     // target.value método para pegar valor do input 
@@ -57,9 +57,9 @@ class App extends Component {
                     <Dashboard posicao="centro">
                         <Widget>
                             <div className="tweetsArea">
-                                {this.state.tweets.map((elemento,index) => (
-                                    <Tweet texto={elemento} key={index}/>
-                                ))}
+                                {this.state.tweets.length > 0 ?
+                                this.state.tweets.map((item,index) => (<Tweet texto={item} key={index} usuario="@raimartins"/>)) : <p>Compartilhe um tweet!</p>
+                                }
                             </div>
                         </Widget>
                     </Dashboard>
@@ -68,5 +68,7 @@ class App extends Component {
         );
     }
 }
+
+// cada filho do map precisa de uma chave key para ele não se perder! 
 
 export default App;
