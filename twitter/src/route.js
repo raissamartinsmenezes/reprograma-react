@@ -20,7 +20,7 @@ class PrivateRoute extends React.Component {
         // esse Component é o Home
         const Componente = this.props.component
         // console.log(this.props)
-        if(estaAutenticado()){ // aqui poderia utilizar apenas o localStorage.getItem('TOKEN')        pois já é true
+        if(estaAutenticado()){ // aqui poderia utilizar apenas o localStorage.getItem('TOKEN') pois já é true
             // componente de rota do tweet
             // ...props > peguei todas as propriedades daquele componente, aqui no caso será o do componente Home
             return <Route render={() => <Componente {...this.props}></Componente>}></Route>

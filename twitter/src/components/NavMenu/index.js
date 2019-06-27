@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import navMenuStyles from "./navMenu.module.css";
+import { Link } from 'react-router-dom'
+// para links externo que serão redirecionados para páginas fora do seu sistema 
 
 export default class NavMenu extends Component {
   render() {
@@ -9,7 +11,7 @@ export default class NavMenu extends Component {
           <li className={navMenuStyles.navMenu__item}>
             <a className={navMenuStyles.navMenu__link} href="/">
               Bem vindo(a): <br />
-              <strong>{this.props.usuario}</strong>
+              <strong>@{this.props.usuario}</strong>
             </a>
           </li>
           <li className={navMenuStyles.navMenu__item}>
@@ -23,9 +25,9 @@ export default class NavMenu extends Component {
             </a>
           </li>
           <li className={navMenuStyles.navMenu__item}>
-            <a className={navMenuStyles.navMenu__link} href="/logout">
+            <Link className={navMenuStyles.navMenu__link} to="/" onClick={() => localStorage.clear()}>
               Logout
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>
