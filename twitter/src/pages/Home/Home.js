@@ -56,6 +56,13 @@ class App extends Component {
     //     localStorage.clear()
     // }
 
+    removeTweet = (idRecebido) => {
+        const testeFilter = this.state.tweets.filter(item => item._id !== idRecebido)
+        this.setState({
+            tweets: testeFilter
+        })
+        // console.log('teste ok', idRecebido)
+    }
 
     // target.value método para pegar valor do input 
     // como atualizar o usuario de forma dinâmica > através de Redux! 
@@ -90,7 +97,7 @@ class App extends Component {
                         <Widget>
                             <div className="tweetsArea">
                                 {this.state.tweets.length > 0 ?
-                                this.state.tweets.map((item,index) => (<Tweet {...item} key={index}/>)) : <p>Compartilhe um tweet!</p>
+                                this.state.tweets.map((item,index) => (<Tweet {...item} key={item._id} remove={this.removeTweet}/>)) : <p>Compartilhe um tweet!</p>
                                 }
                             </div>
                         </Widget>
